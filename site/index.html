@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='styles.css' rel='stylesheet'>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Can you get the D?</h1>
+    <main>
+    <form id="searchForm">
+        <h2>Where you be?</h2>
+        <input id='searchInput' type ='text' placeholder='Enter city name'>
+        <select id='skin'>
+                <option value='null'>Pick your skin type</option>
+                <option value='1'>Skin type 1: Always burn, never tan</option>
+                <option value='2'>Skin type 2: Burn easily, rarely tan</option>
+                <option value='3'>Skin type 3: Occasionally burn, slowly tan</option>
+                <option value='4'>Skin type 4: Rarely burn, rapidly tan</option>
+                <option value='5'>Skin type 5 & 6: Very rarely burn, always dark</option>
+        </select>
+        <button type ='submit' id='submitButton'>Search</button>
+    </form>
+    <div id='peekABoo'>
+        <p>Currently it is <span id='summary'></span> and <span id='tempSpan'> </span> degrees outside</p>
+        <p>The UV Index is: <span id='uvSpan'> </span></p>
+        <p><span id='ballSpan'></span></p>
+        <p id='toggleTime'>You need <span id='timeSpan'></span> in the sun to get the D...heh</p>
+    </div>
+</main>
+<footer>
+    <p><a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a></p>
+</footer>
+</body>
+<script src="/__/firebase/7.12.0/firebase-app.js"></script>
+<script src="/__/firebase/init.js"></script>
+<script src='script.js'></script>
+</html>

@@ -1,0 +1,4 @@
+[build]
+  functions = "functions"
+  publish = "site"
+  command = "echo 'No build here yet!'"

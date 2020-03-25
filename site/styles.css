@@ -1,0 +1,26 @@
+
+body{
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: #fdd835;
+    text-align: center;
+}
+main{
+    height: 75vh;
+}
+form{
+    margin-bottom: 1rem;
+}
+form select{
+    margin: 0.5rem;
+}
+footer a{
+    text-decoration: none;
+    font-weight: bold;
+    color: royalblue;
+}
+footer a:hover{
+    color: white;
+}
+footer a:visited{
+    color: black;
+}
