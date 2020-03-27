@@ -27,14 +27,13 @@ async function getAllInfo(){
     await fetchLocation(searchValue)
     allData.timeToVitD = findTimeForVitamin(allData.skin,allData.uvIndex)
     allData.ballAnswer = magicBall(allData.skin, allData.timeToVitD) 
-
     changeDisplay()
 }
 // const fetchLocation = async ()=>
 //   await(await fetch('/.netlify/functions/test')).json();
 
  async function fetchLocation(searchValue){
-    console.log(searchValue)
+    // console.log(searchValue)
      let data = await(await fetch(`/.netlify/functions/test?place=${searchValue}`)).json()
       .then(data =>{
             allData.uvIndex = data.currently.uvIndex;
@@ -62,7 +61,7 @@ function changeDisplay(){
         toggleTime.style.display ='block';
     }else 
         toggleTime.style.display ='none';
-        console.log(allData)
+        // console.log(allData)
     }
 
 
