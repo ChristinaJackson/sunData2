@@ -8,7 +8,6 @@ const searchInput = document.getElementById('searchInput');
 const summarySpan = document.getElementById('summary');
 const ballSpan = document.getElementById('ballSpan');
 const timeSpan = document.getElementById('timeSpan');
-const noDLine = document.getElementById('noD')
 const toggleTime = document.getElementById('toggleTime')
 
 dataDisplay.style.display ='none';
@@ -60,13 +59,11 @@ function changeDisplay(){
     ballSpan.textContent = allData.ballAnswer;
     if(allData.timeToVitD !== false){
         timeSpan.textContent = allData.timeToVitD;
-        noDLine.style.display="none"
+        toggleTime.style.display ='block';
     }else 
-        noDLine.style.display="block"
         toggleTime.style.display ='none';
         console.log(allData)
     }
-
 
 
 // fetchLocation()
