@@ -22,13 +22,14 @@ searchForm.addEventListener("submit", e => {
 })
 
 async function getAllInfo(){
+    //clean here and give feedback to user
     const searchValue = searchInput.value;
     allData.skin = parseInt(skinChoice.options[skinChoice.selectedIndex].value)
     await fetchLocation(searchValue)
     allData.timeToVitD = findTimeForVitamin(allData.skin,allData.uvIndex)
     allData.ballAnswer = magicBall(allData.skin, allData.timeToVitD) 
     changeDisplay()
-}
+};
 // const fetchLocation = async ()=>
 //   await(await fetch('/.netlify/functions/test')).json();
 
@@ -40,15 +41,17 @@ async function getAllInfo(){
             allData.temp = Math.round(data.currently.temperature);
             allData.summary = data.currently.summary;      
 })
-}
+};
+
 let allData = {
-    temp: fetchLocation.temp,
+    skin : getAllInfo.skin,  
     uvIndex : fetchLocation.uvIndex,
+    temp: fetchLocation.temp,
     summary :fetchLocation.summary,
-    skin : getAllInfo.skin,
     timeToVitD: getAllInfo.timeToVitD,
     ballAnswer: getAllInfo.ballAnswer
 }
+
 
 function changeDisplay(){
     dataDisplay.style.display ='block';
