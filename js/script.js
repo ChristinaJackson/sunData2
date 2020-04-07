@@ -1,41 +1,38 @@
-
-const dataGoesHere = document.getElementById('sunData');
+//this project calls two separate API's . The mapbox to get coords and then darksky weather based on the coords given
 const dataDisplay =document.getElementById('peekABoo');
 const searchForm = document.getElementById('searchForm')
 const submitButton = document.getElementById('submitButton');
-const skinChoice = document.getElementById('skin');
-const searchInput = document.getElementById('searchInput');
-const summarySpan = document.getElementById('summary');
-const ballSpan = document.getElementById('ballSpan');
-const timeSpan = document.getElementById('timeSpan');
-const toggleTime = document.getElementById('toggleTime')
 
+//hides the data in the app until it has results to show
 dataDisplay.style.display ='none';
-
 
 searchForm.addEventListener("submit", e => {
     e.preventDefault();
+    //once the form is submitted...sunApp goes to work
     getAllInfo();
-    // const searchValue = searchInput.value;
-    // allData.skin = parseInt(skinChoice.options[skinChoice.selectedIndex].value)
-    // fetchLocation(searchValue)
 })
 
 async function getAllInfo(){
-    //clean here and give feedback to user
+    const searchInput = document.getElementById('searchInput');
+    const skinChoice = document.getElementById('skin');
+
+    //clean this user input somehow 
     const searchValue = searchInput.value;
+    //pulls data from form on skin type, assigns to allData 
     allData.skin = parseInt(skinChoice.options[skinChoice.selectedIndex].value)
     await fetchLocation(searchValue)
+    //assigns the timetoVitD value in the allData object to the result of calling findTimeForVitD function
     allData.timeToVitD = findTimeForVitamin(allData.skin,allData.uvIndex)
+    //assigns ballanswer value in all data to the result of calling magicball()
     allData.ballAnswer = magicBall(allData.skin, allData.timeToVitD) 
     changeDisplay()
 };
-// const fetchLocation = async ()=>
-//   await(await fetch('/.netlify/functions/test')).json();
 
+ //gets location data from mapbox API and then forwards the lat and long to the 
+    //darksky API in the "backend?" returns current weather info in json format
  async function fetchLocation(searchValue){
-    // console.log(searchValue)
      let data = await(await fetch(`/.netlify/functions/test?place=${searchValue}`)).json()
+    //assigns values based on darkSky response
       .then(data =>{
             allData.uvIndex = data.currently.uvIndex;
             allData.temp = Math.round(data.currently.temperature);
@@ -43,6 +40,8 @@ async function getAllInfo(){
 })
 };
 
+//----------------------------------------What is this even----------->
+//-----it works though :) -------------
 let allData = {
     skin : getAllInfo.skin,  
     uvIndex : fetchLocation.uvIndex,
@@ -52,13 +51,18 @@ let allData = {
     ballAnswer: getAllInfo.ballAnswer
 }
 
-
+//changes display once all values are in
 function changeDisplay(){
+    const summarySpan = document.getElementById('summary');
+    const ballSpan = document.getElementById('ballSpan');
+const timeSpan = document.getElementById('timeSpan');
+const toggleTime = document.getElementById('toggleTime')
     dataDisplay.style.display ='block';
     tempSpan.textContent = allData.temp;
     uvSpan.textContent = allData.uvIndex;
     summarySpan.textContent = allData.summary;
     ballSpan.textContent = allData.ballAnswer;
+    //TODO - not finished -- will not show time to vit d if you cannot get vit D at the momenent 
     if(allData.timeToVitD !== false){
         timeSpan.textContent = allData.timeToVitD;
         toggleTime.style.display ='block';
@@ -67,19 +71,9 @@ function changeDisplay(){
         // console.log(allData)
     }
 
-
-// fetchLocation()
-//     .then(data =>{
-//         console.log(data)
-//         let uvIndex = data.currently.uvIndex;
-//         let temp = Math.round(data.currently.temperature);
-//         let summary = data.currently.summary;
-//         console.log(uvIndex,temp,summary)
-// })
-
-
-
-
+//findTimeForVitaminD()
+//returns the time needed in the sun to get daily vitamin d...or false if 
+//if you cant get vit d
 
   function findTimeForVitamin(skin,uvIndex){
     // console.log(skin,uvIndex)
@@ -104,6 +98,7 @@ function changeDisplay(){
     } 
 }
 
+//magic ball answers based on true/false values of timeToVitD()
 function magicBall(timeToVitD){
     timeToVitD = allData.timeToVitD;
     // console.log(timeToVitD)
