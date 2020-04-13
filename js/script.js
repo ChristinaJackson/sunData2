@@ -59,7 +59,7 @@ const timeSpan = document.getElementById('timeSpan');
 const toggleTime = document.getElementById('toggleTime')
     dataDisplay.style.display ='block';
     tempSpan.textContent = allData.temp;
-    uvSpan.textContent = allData.uvIndex;
+    // uvSpan.textContent = allData.uvIndex;
     summarySpan.textContent = allData.summary;
     ballSpan.textContent = allData.ballAnswer;
     //TODO - not finished -- will not show time to vit d if you cannot get vit D at the momenent 
