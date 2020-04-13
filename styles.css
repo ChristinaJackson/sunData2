@@ -52,6 +52,7 @@
     flex-direction: column;
     align-items: flex-start;
     width: 95vw;
+    max-width: 400px;
   }
   form input{
     padding: 5px;
