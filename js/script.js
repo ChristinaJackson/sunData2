@@ -1,3 +1,10 @@
+//TODO:
+//need a way to handle errors messages when server issues
+//or with location issues
+//provide feedback on location searched 
+//accessible form,button and results
+//bonus --> flowers, better sun
+
 //this project calls two separate API's . The mapbox to get coords and then darksky weather based on the coords given
 const dataDisplay =document.getElementById('peekABoo');
 const searchForm = document.getElementById('searchForm')
