@@ -5,35 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href='styles.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
 </head>
 <body>
-    <h1>Vitamin D Detector</h1>
-    <div id='testdiv'></div>
-    <main>
-    <form id="searchForm">
-        <h2>Where you be?</h2>
-        <input id='searchInput' type ='text' required minlength='3' maxlength='50' pattern="^[a-zA-Z0-9, ]*$" placeholder='Enter Location'>
+    <main class='mainLayer'>
+        <h1>Vitamin D<br>Detector</h1>
+        <form id="searchForm">
+          <input id='searchInput' type ='text' placeholder='Enter Your Location'>
         <select id='skin'>
-                <option value='null'>Pick your skin type</option>
-                <option value='1'>Skin type 1: Always burn, never tan</option>
-                <option value='2'>Skin type 2: Burn easily, rarely tan</option>
-                <option value='3'>Skin type 3: Occasionally burn, slowly tan</option>
-                <option value='4'>Skin type 4: Rarely burn, rapidly tan</option>
-                <option value='5'>Skin type 5 & 6: Very rarely burn, always dark</option>
-        </select>
-        <button type ='submit' id='submitButton'>Search</button>
-    </form>
-    <div id='peekABoo'>
-        <p>Currently it is <span id='summary'></span> and <span id='tempSpan'> </span> degrees outside</p>
-        <p>The UV Index is: <span id='uvSpan'> </span></p>
-        <p>Can you get vitamin D? <span id='ballSpan'></span></p>
-        <p id='toggleTime'>You need <span id='timeSpan'></span> in the sun.</p>
+          <option value='null'>Click to pick your skin type</option>
+          <option value='1'>Skin type 1: Always burn, never tan </option>
+         <option value='2'>Skin type 2: Burn easily, rarely tan</option>
+         <option value='3'>Skin type 3: Occasionally burn, slowly tan</option>
+        <option value='4'>Skin type 4: Rarely burn, rapidly tan</option>
+        <option value='5'>Skin type 5 & 6: Very rarely burn, always dark</option>
+            </select>
+            <div><button type ='submit' id='submitButton'>Detect</button></div>
+        </form>
+      
+        <div id='peekABoo'>
+            <p>Currently it is <span id='summary'></span> and <span id='tempSpan'> </span> degrees outside</p>
+            <p>The UV Index is: <span id='uvSpan'> </span></p>
+            <p>Can you get Vitamin D? <span id='ballSpan'></span></p>
+            <p id='toggleTime'>You need <span id='timeSpan'></span> in the sun.</p>
+        </div>
+    </main>
     </div>
-</main>
+        <div class='blueLayer'>  
+            <i class="fa fa-cloud fa-5x cloud1"></i>
+            <i class="fa fa-cloud fa-4x cloud2"></i>
+        <div class='sunLayer'></div>
+        </div>
+        <div class="greenLayer">
+            <p class='poweredBy'><a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a></p>
+        </div>
 <footer>
-    <p><a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a></p>
 </footer>
+
 </body>
+
 <script src='js/script.js'></script>
 </html>

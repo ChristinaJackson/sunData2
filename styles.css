@@ -1,26 +1,118 @@
 
-body{
-    font-family: Helvetica, Arial, sans-serif;
-    background-color: #fdd835;
+*{ 
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+  }
+  
+  .blueLayer{
+    background-color:#33CFF7;
+    height: 90vh;
+  }
+  .greenLayer{
+    background-color: #2B9E28;
+    height:10vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  
+  .sunLayer{
+    width: 180px;
+    height: 180px;
+    border-radius:50%;
+    margin: auto;
+    background-color:#FAF034;
+  }
+  
+  .backgroundLayer{
+    z-index: 0;
+    border: solid black 20px;
+  }
+  
+  .mainLayer{
+    z-index: 1000;
+    position: absolute;
+    width: 100%;
+  }
+  
+  main{
+      text-align: center;
+  
+  }
+  h1{
+    margin: 2.5rem 1rem 3rem 1rem;
     text-align: center;
-}
-main{
-    height: 75vh;
-}
-form{
+    font-family: "Chalkboard SE";
+  }
+  
+  form{
+    margin: 2rem auto 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 95vw;
+  }
+  form input{
+    padding: 5px;
+    width: 100%;
+    color: black;
+    text-align: center;
+    margin-bottom: 1.25rem;
+    border-radius: 10px;
+    font-family: 'PT Mono', monospace;
+    border: solid #707070 1px;
+    font-size: .8rem;
+    font-weight: bold;
+    opacity: 1;
+  }
+  form select{
+    text-align: center;
+    width:100%;
+    font-family: 'PT Mono', monospace;
+    margin-bottom: 1.25rem;
+    padding: 5px;
+    border-radius: 10px;
+    border: solid #707070 1px;
+    font-size: .8rem;
+  }
+  
+  form button{
+    font-family: 'PT Mono', monospace;
+    padding: 5px 15px;
     margin-bottom: 1rem;
+    color: white;
+    background-color: #FE689D;
+    border: solid #FE689D 1px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  button:active{
+    transform: translate(1px, 1px);
+    box-shadow: 3px 2px 3px 0px rgba(59,59,56,1);
 }
-form select{
-    margin: 0.5rem;
-}
-footer a{
+  #peekABoo{
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5rem;
+  }
+  .cloud1{
+    color: white;
+    float: right;
+    margin-right: 0.25rem;
+  }
+  .cloud2{
+    color: white;
+    float: left;
+    margin: 5rem 1rem;
+  }
+  a {
     text-decoration: none;
     font-weight: bold;
-    color: royalblue;
-}
-footer a:hover{
     color: white;
+    font-family: "Chalkboard SE";
 }
-footer a:visited{
-    color: black;
+  a:hover{
+    color: darkblue;
 }
+ 
