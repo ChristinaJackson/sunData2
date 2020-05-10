@@ -23,37 +23,36 @@ async function getAllInfo(){
     const searchInput = document.getElementById('searchInput');
     const skinChoice = document.getElementById('skin');
 
-    //clean this user input somehow 
     const searchValue = searchInput.value;
     //pulls data from form on skin type, assigns to allData 
-    allData.skin = parseInt(skinChoice.options[skinChoice.selectedIndex].value)
-    await fetchLocation(searchValue)
+    allData.skin = parseInt(skinChoice.options[skinChoice.selectedIndex].value);
+    await fetchWeatherInfo(searchValue)
     //assigns the timetoVitD value in the allData object to the result of calling findTimeForVitD function
-    allData.timeToVitD = findTimeForVitamin(allData.skin,allData.uvIndex)
+    allData.timeToVitD = findTimeForVitamin(allData.skin,allData.uvIndex);
     //assigns ballanswer value in all data to the result of calling magicball()
-    allData.ballAnswer = magicBall(allData.skin, allData.timeToVitD) 
+    allData.ballAnswer = magicBall(allData.skin, allData.timeToVitD) ;
     changeDisplay()
 };
 
- //gets location data from mapbox API and then forwards the lat and long to the 
-    //darksky API in the "backend?" returns current weather info in json format
- async function fetchLocation(searchValue){
+//gets location data from mapbox API and then forwards the lat and long to the 
+//darksky API, returns current weather info
+ async function fetchWeatherInfo(searchValue){
      let data = await(await fetch(`/.netlify/functions/test?place=${searchValue}`)).json()
     //assigns values based on darkSky response
       .then(data =>{
-            allData.uvIndex = data.currently.uvIndex;
-            allData.temp = Math.round(data.currently.temperature);
-            allData.summary = data.currently.summary;      
+        allData.uvIndex = data.currently.uvIndex;
+        allData.temp = Math.round(data.currently.temperature);
+        allData.summary = data.currently.summary;      
 })
 };
 
 //----------------------------------------What is this even----------->
-//-----it works though :) -------------
+//-----it works though :). Right Above this(line 43-45) shows the double assigning I'm talking about-------------
 let allData = {
     skin : getAllInfo.skin,  
-    uvIndex : fetchLocation.uvIndex,
-    temp: fetchLocation.temp,
-    summary :fetchLocation.summary,
+    uvIndex : fetchWeatherInfo.uvIndex,
+    temp: fetchWeatherInfo.temp,
+    summary :fetchWeatherInfo.summary,
     timeToVitD: getAllInfo.timeToVitD,
     ballAnswer: getAllInfo.ballAnswer
 }
@@ -62,28 +61,24 @@ let allData = {
 function changeDisplay(){
     const summarySpan = document.getElementById('summary');
     const ballSpan = document.getElementById('ballSpan');
-const timeSpan = document.getElementById('timeSpan');
-const toggleTime = document.getElementById('toggleTime')
+    const timeSpan = document.getElementById('timeSpan');
+    const toggleTime = document.getElementById('toggleTime')
     dataDisplay.style.display ='block';
     tempSpan.textContent = allData.temp;
-    // uvSpan.textContent = allData.uvIndex;
+    uvSpan.textContent = allData.uvIndex;
     summarySpan.textContent = allData.summary;
     ballSpan.textContent = allData.ballAnswer;
-    //TODO - not finished -- will not show time to vit d if you cannot get vit D at the momenent 
-    if(allData.timeToVitD !== false){
-        timeSpan.textContent = allData.timeToVitD;
-        toggleTime.style.display ='block';
-    }else 
-        toggleTime.style.display ='none';
-        // console.log(allData)
+    //TODO - not finished -- will not show time to vit d if you cannot get vit D at the moment  
+        if(allData.timeToVitD !== false){
+            timeSpan.textContent = allData.timeToVitD;
+            toggleTime.style.display ='block';
+        }else toggleTime.style.display ='none';
     }
 
-//findTimeForVitaminD()
 //returns the time needed in the sun to get daily vitamin d...or false if 
 //if you cant get vit d
 
   function findTimeForVitamin(skin,uvIndex){
-    // console.log(skin,uvIndex)
     if(skin === 1 && uvIndex >= 11){
         return timeToVitD = '1-5min'
     }else if(skin === 1 && (uvIndex >=8 && uvIndex <= 10)|| skin === 2 && uvIndex >= 11){
@@ -108,15 +103,14 @@ const toggleTime = document.getElementById('toggleTime')
 //magic ball answers based on true/false values of timeToVitD()
 function magicBall(timeToVitD){
     timeToVitD = allData.timeToVitD;
-    // console.log(timeToVitD)
     const negativeResponses = ["Don't count on it.", "My reply is no.", 
     "My sources say no.", "Very doubtful.", "Hell no."];
-    const postiveResponses = ["It is certain.", "You may rely on it.", 
+    const positiveResponse = ["It is certain.", "You may rely on it.", 
     "As I see it, yes.", "Outlook good."];
     if (timeToVitD !== false){
-        let length = postiveResponses.length;
+        let length = positiveResponse.length;
         let magicNumber = Math.floor(Math.random() * length);
-        ballAnswer = postiveResponses[magicNumber];
+        ballAnswer = positiveResponse[magicNumber];
         return ballAnswer
       }else{
         let length = negativeResponses.length;
