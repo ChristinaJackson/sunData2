@@ -47,6 +47,8 @@ async function fetchWeatherInfo(searchValue) {
 
 //----------------------------------------What is this even----------->
 //-----it works though :). Right Above this(line 43-45) shows the double assigning I'm talking about-------------
+//What I want: A place to store variables while they come in, then pull from that place to update the display....
+//while also being clear about where the data is coming from
 let allData = {
     skin: getAllInfo.skin,
     uvIndex: fetchWeatherInfo.uvIndex,
@@ -100,8 +102,6 @@ function findTimeForVitamin(skin, uvIndex) {
 
 //magic ball answers based on true/false values of timeToVitD()
 function magicBall(timeToVitD) {
-    console.log(timeToVitD)
-    // timeToVitD = allData.timeToVitD;
     const negativeResponses = ["Don't count on it.", "My reply is no.",
         "My sources say no.", "Very doubtful.", "Ha, nope."];
     const positiveResponse = ["It is certain.", "You may rely on it.",
