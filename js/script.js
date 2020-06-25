@@ -5,10 +5,9 @@
 //accessible form,button and results
 //bonus --> flowers, better sun
 
-//this project calls two separate API's . The mapbox to get coords and then darksky weather based on the coords given
+//this project calls two separate API's . The mapbox to get lat/long and then darksky weather based on the coords given
 const dataDisplay = document.getElementById('peekABoo');
-const searchForm = document.getElementById('searchForm')
-const submitButton = document.getElementById('submitButton');
+const searchForm = document.getElementById('searchForm');
 
 //hides the data in the app until it has results to show
 dataDisplay.style.display = 'none';
@@ -23,61 +22,49 @@ async function getAllInfo() {
     const searchInput = document.getElementById('searchInput');
     const skinChoice = document.getElementById('skin');
     const searchValue = searchInput.value;
-    //pulls data from form on skin type, assigns to allData 
-    allData.skin = parseInt(skinChoice.options[skinChoice.selectedIndex].value);
+    let skin = parseInt(skinChoice.options[skinChoice.selectedIndex].value);
     await fetchWeatherInfo(searchValue)
-    //assigns the timetoVitD value in the allData object to the result of calling findTimeForVitD function
-    allData.timeToVitD = findTimeForVitamin(allData.skin, allData.uvIndex);
-    //assigns ballanswer value in all data to the result of calling magicball()
-    allData.ballAnswer = magicBall(allData.timeToVitD);
-    changeDisplay()
+        .then(data => {
+            let uvIndex = data[0];
+            let temp = data[1];
+            let currentConditions = data[2];
+            let timeToVitD = findTimeForVitamin(skin, uvIndex);
+            let ballAnswer = magicBall(timeToVitD);
+            changeDisplay(uvIndex, temp, currentConditions, timeToVitD, ballAnswer)
+        })
 };
 
 //gets location data from mapbox API and then forwards the lat and long to the 
 //darksky API, returns current weather info
 async function fetchWeatherInfo(searchValue) {
-    let data = await (await fetch(`/.netlify/functions/test?place=${searchValue}`)).json()
-        //assigns values based on darkSky response
+    let finalData = await (await fetch(`/.netlify/functions/test?place=${searchValue}`)).json()
+        // assigns values based on darkSky response
         .then(data => {
-            allData.uvIndex = data.currently.uvIndex;
-            allData.temp = Math.round(data.currently.temperature);
-            allData.summary = data.currently.summary;
+            let weatherInfoArray = [data.currently.uvIndex, Math.round(data.currently.temperature), data.currently.summary]
+            return weatherInfoArray
         })
+    return finalData
 };
 
-//----------------------------------------What is this even----------->
-//-----it works though :). Right Above this(line 43-45) shows the double assigning I'm talking about-------------
-//What I want: A place to store variables while they come in, then pull from that place to update the display....
-//while also being clear about where the data is coming from
-let allData = {
-    skin: getAllInfo.skin,
-    uvIndex: fetchWeatherInfo.uvIndex,
-    temp: fetchWeatherInfo.temp,
-    summary: fetchWeatherInfo.summary,
-    timeToVitD: getAllInfo.timeToVitD,
-    ballAnswer: getAllInfo.ballAnswer
-}
-
 //changes display once all values are in
-function changeDisplay() {
+function changeDisplay(uvIndex, temp, summary, timeToVitD, ballAnswer) {
     const summarySpan = document.getElementById('summary');
     const ballSpan = document.getElementById('ballSpan');
     const timeSpan = document.getElementById('timeSpan');
     const toggleTime = document.getElementById('toggleTime')
     dataDisplay.style.display = 'block';
-    tempSpan.textContent = allData.temp;
-    uvSpan.textContent = allData.uvIndex;
-    summarySpan.textContent = allData.summary;
-    ballSpan.textContent = allData.ballAnswer;
-    if (allData.timeToVitD !== false) {
-        timeSpan.textContent = allData.timeToVitD;
+    tempSpan.textContent = temp;
+    uvSpan.textContent = uvIndex;
+    summarySpan.textContent = summary;
+    ballSpan.textContent = ballAnswer;
+    if (timeToVitD !== false) {
+        timeSpan.textContent = timeToVitD;
         toggleTime.style.display = 'block';
     } else toggleTime.style.display = 'none';
 }
 
-//returns the time needed in the sun to get daily vitamin d...or false if 
-//if you cant get vit d
-
+//returns the time needed in the sun to get daily vitamin d...
+// or false if you cant get vit d
 function findTimeForVitamin(skin, uvIndex) {
     if (skin === 1 && uvIndex >= 11) {
         return timeToVitD = '1-5min'
@@ -98,7 +85,7 @@ function findTimeForVitamin(skin, uvIndex) {
     } else {
         return timeToVitD = false
     }
-}
+};
 
 //magic ball answers based on true/false values of timeToVitD()
 function magicBall(timeToVitD) {
@@ -117,4 +104,4 @@ function magicBall(timeToVitD) {
         ballAnswer = negativeResponses[magicNumber];
         return ballAnswer
     }
-}
+};
