@@ -65,27 +65,32 @@ function changeDisplay(uvIndex, temp, summary, timeToVitD, ballAnswer) {
 
 //returns the time needed in the sun to get daily vitamin d...
 // or false if you cant get vit d
-function findTimeForVitamin(skin, uvIndex) {
-    if (skin === 1 && uvIndex >= 11) {
-        return timeToVitD = '1-5min'
-    } else if (skin === 1 && (uvIndex >= 8 && uvIndex <= 10) || skin === 2 && uvIndex >= 11) {
-        return timeToVitD = '2-8min'
-    } else if (skin === 1 && (uvIndex >= 6 && uvIndex <= 7) || skin === 2 && (uvIndex >= 8 && uvIndex <= 10) || skin === 3 && uvIndex >= 11) {
-        return timeToVitD = '5-10min'
-    } else if (skin === 1 && (uvIndex >= 3 && uvIndex <= 5) || skin === 2 && (uvIndex >= 6 && uvIndex <= 7) || skin === 3 && (uvIndex >= 8 && uvIndex <= 10) || skin === 4 && uvIndex >= 11) {
-        return timeToVitD = '10-15min'
-    } else if (skin === 2 && (uvIndex >= 3 && uvIndex <= 5) || skin === 3 && (uvIndex >= 6 && uvIndex <= 7) || skin === 4 && (uvIndex >= 8 && uvIndex <= 10) || skin >= 5 && uvIndex >= 11) {
-        return timeToVitD = '15-20min'
-    } else if (skin === 3 && (uvIndex >= 3 && uvIndex <= 5) || skin === 4 && (uvIndex >= 6 && uvIndex <= 7) || skin >= 5 && (uvIndex >= 8 && uvIndex <= 10)) {
-        return timeToVitD = '20-30min'
-    } else if (skin === 4 && (uvIndex >= 3 && uvIndex <= 5) || skin >= 5 && (uvIndex >= 6 && uvIndex <= 7)) {
-        return timeToVitD = '30-40min'
-    } else if (skin >= 5 && (uvIndex >= 3 && uvIndex <= 5)) {
-        return timeToVitD = "40-60min"
-    } else {
-        return timeToVitD = false
-    }
+const timeInSunMap = {
+    // uvIndex   3-5      	6-7 	       8-10 	    11+
+    1: ["10-15 min", "5-10 min", "2-8 min", "1-5 min"],
+    2: ["15-20 min", "10-15 min", "5-10 min", "2-8 min"],
+    3: ["20-30 min", "15-20 min", "10-15 min", "5-10 min"],
+    4: ["30-40 min", "20-30 min", "15-20 min", "10-15 min"],
+    5: ["40-60 min", "30-40 min", "20-30 min", "15-20 min"]
 };
+
+function findTimeForVitamin(skin, uvIndex) {
+    if (uvIndex >= 3 && uvIndex <= 5) {
+        return timeInSunMap[`${skin}`][0];
+    }
+    else if (uvIndex >= 6 && uvIndex <= 7) {
+        return timeInSunMap[`${skin}`][1];
+    }
+    else if (uvIndex >= 8 && uvIndex <= 10) {
+        return timeInSunMap[`${skin}`][2];
+    }
+    else if (uvIndex >= 11) {
+        return timeInSunMap[skin][3];
+    }
+    else {
+        return false;
+    }
+}
 
 //magic ball answers based on true/false values of timeToVitD()
 function magicBall(timeToVitD) {
