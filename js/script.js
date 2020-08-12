@@ -66,7 +66,7 @@ function changeDisplay(uvIndex, temp, summary, timeToVitD, ballAnswer) {
 //returns the time needed in the sun to get daily vitamin d...
 // or false if you cant get vit d
 const timeInSunMap = {
-    // uvIndex   3-5      	6-7 	       8-10 	    11+
+    // uvIndex 3-5          6-7 	  8-10 	     11+
     1: ["10-15 min", "5-10 min", "2-8 min", "1-5 min"],
     2: ["15-20 min", "10-15 min", "5-10 min", "2-8 min"],
     3: ["20-30 min", "15-20 min", "10-15 min", "5-10 min"],
@@ -90,7 +90,7 @@ function findTimeForVitamin(skin, uvIndex) {
     else {
         return false;
     }
-}
+};
 
 //magic ball answers based on true/false values of timeToVitD()
 function magicBall(timeToVitD) {
