@@ -1,7 +1,8 @@
 //TODO:
 //need a way to handle errors messages when server issues
 //or with location issues
-//provide feedback on location searched 
+//provide feedback on location searched
+//provide user feedback while waiting for results
 //accessible form,button and results
 //bonus --> flowers, better sun
 
