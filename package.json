@@ -19,7 +19,7 @@
   "homepage": "https://github.com/ChristinaJackson/sunData2#readme",
   "dependencies": {
     "axios": "^0.19.2",
-    "netlify-cli": "^2.50.0",
+    "netlify-cli": "^2.59.0",
     "netlify-lambda": "^1.6.3"
   }
 }
