@@ -25,10 +25,10 @@ async function getAllInfo() {
     const searchValue = searchInput.value;
     let skin = parseInt(skinChoice.options[skinChoice.selectedIndex].value);
     await fetchWeatherInfo(searchValue)
-        .then(data => {
-            let uvIndex = data[0];
-            let temp = data[1];
-            let currentConditions = data[2];
+        .then(finalData => {
+            let uvIndex = finalData[0];
+            let temp = finalData[1];
+            let currentConditions = finalData[2];
             let timeToVitD = findTimeForVitamin(skin, uvIndex);
             let ballAnswer = magicBall(timeToVitD);
             changeDisplay(uvIndex, temp, currentConditions, timeToVitD, ballAnswer)
