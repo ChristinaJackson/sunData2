@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/ChristinaJackson/sunData2#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "netlify-cli": "^2.61.2",
     "netlify-lambda": "^1.6.3",
     "serialize-javascript": "^3.1.0"
